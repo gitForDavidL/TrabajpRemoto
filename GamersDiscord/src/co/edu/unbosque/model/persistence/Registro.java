@@ -43,7 +43,7 @@ public class Registro implements Serializable {
 	}
 
 	public String toString() {
-		return iD + " -Nombre: " + this.nombre + " Juego: " + this.juego + " Puntaje : " + this.puntaje + "\n";
+		return  iD + "| Nombre: " + this.nombre + "| Juego: " + this.juego + " | Puntaje : " + this.puntaje + "\n";
 	}
 
 	public int getiD() {

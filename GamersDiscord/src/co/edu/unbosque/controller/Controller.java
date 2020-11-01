@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 
 import co.edu.unbosque.model.Gamers;
+import co.edu.unbosque.model.persistence.BinariosFile;
 import co.edu.unbosque.view.View;
 
 public class Controller implements ActionListener {
@@ -26,17 +27,10 @@ public class Controller implements ActionListener {
 
 		if (command.contentEquals(view.getPanelControl().CREAR)) {
 
-			String gmr = view.pedirDatos("Ingrese nombre del jugador: ", "Nombre jugador");
-			String gam = view.pedirDatos("Ingrese nombre del juego : ", "Juego ");
-			Double punt = view.capturarDatoNumerico("Ingrese puntaje del jugador: ");
-
-			gamers.getBin().IngresarGamer(gmr, gam, punt);
-			cargardatos();
+		
 
 		}else if(command.contains(view.getPanelControl().LEER)) {
-			gamers.getBin().leerRegistros();
 			
-			cargardatos();
 		}
 
 	}
@@ -45,9 +39,10 @@ public class Controller implements ActionListener {
 
 		DefaultListModel<String> model = new DefaultListModel<String>();
 
-		for (int i = 0; i < gamers.getBin().getRegistros().size(); i++) {
-			gamers.getBin().getRegistros().get(i).setiD(i);
-			model.addElement(gamers.getBin().getRegistros().get(i).toString());
+		for (int i = 0; i < gamers.getGamerRegistros().size(); i++) {
+			gamers.getGamerRegistros().get(i).setiD(i);
+			model.addElement(gamers.getGamerRegistros().get(i).toString());
+			
 		}
 		view.getPanelJugadores().getData().setModel(model);
 
