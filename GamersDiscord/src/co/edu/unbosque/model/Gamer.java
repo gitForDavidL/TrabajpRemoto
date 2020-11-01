@@ -5,17 +5,23 @@ import java.util.ArrayList;
 import co.edu.unbosque.model.persistence.BinariosFile;
 import co.edu.unbosque.model.persistence.Registro;
 
-public class Gamers {
+public class Gamer {
 
 	private BinariosFile bin;
 	private ArrayList<Registro> gamerRegistros;
 
-	public Gamers() {
+	public Gamer() {
 
 		bin = new BinariosFile();
 		gamerRegistros = new ArrayList<Registro>();
 	}
 
+	public void ingresarDatos(String nombre, String juego, Double puntaje) {
+
+		gamerRegistros.add(new Registro(nombre, juego, puntaje));
+
+	}
+	
 
 	public BinariosFile getBin() {
 		return bin;

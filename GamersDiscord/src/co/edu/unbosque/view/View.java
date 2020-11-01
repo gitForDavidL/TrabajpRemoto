@@ -27,6 +27,7 @@ public class View extends JFrame {
 
 		panelControl.getCrear().addActionListener(control);
 		panelControl.getLeer().addActionListener(control);
+		panelControl.getBorrar().addActionListener(control);
 
 	}
 
@@ -56,19 +57,29 @@ public class View extends JFrame {
 		this.panelJugadores = panelJugadores;
 	}
 
-	public String pedirDatos(String m, String t) {
+	public String pedirDatos(String m) {
 
-		String a = JOptionPane.showInputDialog(null, m, t, 1);
+		String aux = JOptionPane.showInputDialog(m);
 
-		return a;
+		while (esNumero(m) == true) {
+
+			mostrarMensaje("Señor No ingrese números en este campo :)");
+			aux = JOptionPane.showInputDialog(m);
+
+		}
+		return aux;
+
 	}
 
+	
 	public void mostrarMensaje(String m) {
 		JOptionPane.showMessageDialog(null, m);
 	}
 
+	
+	
 	public Double capturarDatoNumerico(String m) {
-		
+
 		Double resultado = 0.0;
 		String aux = JOptionPane.showInputDialog(m);
 
@@ -92,9 +103,10 @@ public class View extends JFrame {
 	public boolean esNumero(String m) {
 		try {
 			Double.parseDouble(m);
+			System.out.println("Ingreso integer");
 			return true;
 		} catch (NumberFormatException nfe) {
-			System.out.println("Entrada invalida.");
+			System.out.println("Ingreso String");
 			return false;
 
 		}

@@ -13,13 +13,13 @@ public class BinariosFile {
 
 	private String ruta = "./Data/registro.dat";
 
-	public void IngresarGamer(ArrayList<Registro> reg) {
+	public void EscribirRegistros(ArrayList<Registro> reg) {
 
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ruta));
 			out.writeObject(reg);
 			out.close();
-			System.out.println("Gamer ingresado con exito");
+			System.out.println("dato ingresado con exito");
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -28,8 +28,9 @@ public class BinariosFile {
 
 	}
 
-	public ArrayList<Registro> leerRegistros(ArrayList<Registro> reg) {
+	public ArrayList<Registro> leerRegistros() {
 		ObjectInputStream in;
+		ArrayList<Registro> reg = new ArrayList<Registro>();
 		try {
 
 			in = new ObjectInputStream(new FileInputStream(ruta));
@@ -41,8 +42,8 @@ public class BinariosFile {
 			for (int i = 0; i < reg.size(); i++) {
 
 				System.out.println(reg.get(i).getNombre());
-				System.out.print(reg.get(i).getJuego());
-				System.out.println(reg.get(i).getPuntaje());
+				System.out.println(reg.get(i).getJuego());
+				System.out.println(reg.get(i).getPuntaje()+"\n");
 			}
 
 		} catch (Exception e) {
