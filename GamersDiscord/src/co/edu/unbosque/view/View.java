@@ -28,6 +28,7 @@ public class View extends JFrame {
 		panelControl.getCrear().addActionListener(control);
 		panelControl.getLeer().addActionListener(control);
 		panelControl.getBorrar().addActionListener(control);
+		panelControl.getActualizar().addActionListener(control);
 
 	}
 
@@ -61,7 +62,7 @@ public class View extends JFrame {
 
 		String aux = JOptionPane.showInputDialog(m);
 
-		while (esNumero(m) == true) {
+		while (esNumero(aux) == true) {
 
 			mostrarMensaje("Señor No ingrese números en este campo :)");
 			aux = JOptionPane.showInputDialog(m);
@@ -71,20 +72,17 @@ public class View extends JFrame {
 
 	}
 
-	
 	public void mostrarMensaje(String m) {
 		JOptionPane.showMessageDialog(null, m);
 	}
 
-	
-	
 	public Double capturarDatoNumerico(String m) {
 
 		Double resultado = 0.0;
 		String aux = JOptionPane.showInputDialog(m);
 
 		while (esNumero(aux) == false) {
-			mostrarMensaje("Señor usuario digite un valor valido");
+			mostrarMensaje("Señor usuario digite un valor valido.");
 			aux = JOptionPane.showInputDialog(m);
 
 		}
@@ -98,6 +96,13 @@ public class View extends JFrame {
 
 		return resultado;
 
+	}
+
+	public String menu() {
+		Object[] opciones = { "1.Nombre", "2.Juego", "3.Puntaje", "4.Todos", "Salir" };
+		Object opcion = JOptionPane.showInputDialog(null, "        ..:Seleciona campo a actualizar :.. ", "Elegir",
+				JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
+		return opcion.toString();
 	}
 
 	public boolean esNumero(String m) {

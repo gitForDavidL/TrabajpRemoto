@@ -18,7 +18,7 @@ public class Controller implements ActionListener {
 		gamer = new Gamer();
 		view = new View(this);
 		view.setVisible(true);
-		
+
 		if (gamer.getBin().leerRegistros().size() != gamer.getGamerRegistros().size()) {
 
 			for (int i = 0; i < gamer.getBin().leerRegistros().size(); i++) {
@@ -34,8 +34,6 @@ public class Controller implements ActionListener {
 			view.mostrarMensaje("Señor usuario todos lo datos han sido leidos");
 		}
 	}
-
-	
 
 	public void actionPerformed(ActionEvent e) {
 		String command = e.getActionCommand();
@@ -65,8 +63,102 @@ public class Controller implements ActionListener {
 
 				view.mostrarMensaje("Señor usuario todos lo datos han sido leidos");
 			}
-		}else if(command.contentEquals(view.getPanelControl().BORRAR)) {
-			
+		} else if (command.contentEquals(view.getPanelControl().BORRAR)) {
+
+			int selec = view.getPanelJugadores().getData().getSelectedIndex();
+
+			if (selec >= 0) {
+
+				view.mostrarMensaje("Se va a eliminar el jugador seleccionado. ");
+
+				gamer.getGamerRegistros().remove(selec);
+				gamer.getBin().leerRegistros().remove(selec);
+
+				view.mostrarMensaje("El jugador se ha eliminado correctamente");
+
+				gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
+				cargardatos();
+
+			} else {
+
+				view.mostrarMensaje("No se ha seleccionado ningun jugador. ");
+			}
+
+		} else if (command.contentEquals(view.getPanelControl().ACTUALIZAR)) {
+
+			int selec = view.getPanelJugadores().getData().getSelectedIndex();
+			if (selec >= 0) {
+
+				String opcion = view.menu();
+
+				switch (opcion) {
+				case "1.Nombre":
+
+					String a = view.pedirDatos("Ingrese el nuevo nombre para el jugador "
+							+ gamer.getGamerRegistros().get(selec).getNombre() + ":");
+					gamer.getGamerRegistros().get(selec).setNombre(a);
+					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
+					cargardatos();
+
+					break;
+
+				case "2.Juego":
+
+					a = view.pedirDatos("Ingrese nuevo juego para el jugador "
+							+ gamer.getGamerRegistros().get(selec).getNombre() + ":");
+
+					gamer.getGamerRegistros().get(selec).setJuego(a);
+					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
+					cargardatos();
+
+					break;
+				case "3.Puntaje":
+
+					Double b = view.capturarDatoNumerico(
+							"Ingrese nuevo puntaje para " + gamer.getGamerRegistros().get(selec).getNombre());
+
+					gamer.getGamerRegistros().get(selec).setPuntaje(b);
+					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
+					cargardatos();
+
+					break;
+
+				case "4.Todos":
+
+					String gam = view.pedirDatos("Ingrese nombre a modificar para el jugador "
+							+ gamer.getGamerRegistros().get(selec).getNombre());
+
+					String jueg = view.pedirDatos("Ingrese juego a modificar para el jugador "
+							+ gamer.getGamerRegistros().get(selec).getNombre());
+
+					Double punt = view.capturarDatoNumerico("Ingrese juego a modificar para el jugador "
+							+ gamer.getGamerRegistros().get(selec).getNombre());
+
+					gamer.getGamerRegistros().get(selec).setNombre(gam);
+					gamer.getGamerRegistros().get(selec).setJuego(jueg);
+					gamer.getGamerRegistros().get(selec).setPuntaje(punt);
+					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
+
+					cargardatos();
+					break;
+
+				case "Salir":
+
+					view.mostrarMensaje("Hasta pronto.");
+
+					break;
+
+				default:
+					view.mostrarMensaje("Señor usuario no ha seleccionado ningun campo a modificar.");
+					break;
+				}
+
+			} else {
+
+				view.mostrarMensaje("Selecciona un jugador para poder actualizar alguno de sus campos. ");
+
+			}
+
 		}
 
 	}
