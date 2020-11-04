@@ -3,40 +3,25 @@ package co.edu.unbosque.model;
 import java.util.ArrayList;
 
 import co.edu.unbosque.model.persistence.BinariosFile;
-import co.edu.unbosque.model.persistence.Registro;
+import co.edu.unbosque.model.persistence.GamerDAO;
+import co.edu.unbosque.model.persistence.GamerDTO;
 
 public class Gamer {
 
-	private BinariosFile bin;
-	private ArrayList<Registro> gamerRegistros;
+	private GamerDAO gamerDAO;
 
 	public Gamer() {
 
-		bin = new BinariosFile();
-		gamerRegistros = new ArrayList<Registro>();
-	}
-
-	public void ingresarDatos(String nombre, String juego, Double puntaje) {
-
-		gamerRegistros.add(new Registro(nombre, juego, puntaje));
+		gamerDAO = new GamerDAO();
 
 	}
-	
 
-	public BinariosFile getBin() {
-		return bin;
+	public GamerDAO getGamerDAO() {
+		return gamerDAO;
 	}
 
-	public void setBin(BinariosFile bin) {
-		this.bin = bin;
-	}
-
-	public ArrayList<Registro> getGamerRegistros() {
-		return gamerRegistros;
-	}
-
-	public void setGamerRegistros(ArrayList<Registro> gamerRegistros) {
-		this.gamerRegistros = gamerRegistros;
+	public void setGamerDAO(GamerDAO gamerDAO) {
+		this.gamerDAO = gamerDAO;
 	}
 
 }

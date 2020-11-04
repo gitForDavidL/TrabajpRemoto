@@ -1,9 +1,6 @@
 package co.edu.unbosque.view;
 
 import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.TrayIcon.MessageType;
-
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -11,6 +8,8 @@ import co.edu.unbosque.controller.Controller;
 
 public class View extends JFrame {
 
+	
+	private static final long serialVersionUID = 1L;
 	private PanelControl panelControl;
 	private PanelJugadores panelJugadores;
 
@@ -62,7 +61,7 @@ public class View extends JFrame {
 
 		String aux = JOptionPane.showInputDialog(m);
 
-		while (esNumero(aux) == true) {
+		while (esNumero(aux) == true  || aux.isEmpty()) {
 
 			mostrarMensaje("Señor No ingrese números en este campo :)");
 			aux = JOptionPane.showInputDialog(m);

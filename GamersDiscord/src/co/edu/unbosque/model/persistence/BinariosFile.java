@@ -13,7 +13,7 @@ public class BinariosFile {
 
 	private String ruta = "./Data/registro.dat";
 
-	public void EscribirRegistros(ArrayList<Registro> reg) {
+	public void escribirRegistros(ArrayList<GamerDTO> reg) {
 
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ruta));
@@ -28,23 +28,18 @@ public class BinariosFile {
 
 	}
 
-	public ArrayList<Registro> leerRegistros() {
+	public ArrayList<GamerDTO> leerRegistros() {
 		ObjectInputStream in;
-		ArrayList<Registro> reg = new ArrayList<Registro>();
+		ArrayList<GamerDTO> reg = new ArrayList<GamerDTO>();
 		try {
 
 			in = new ObjectInputStream(new FileInputStream(ruta));
 
-			reg = (ArrayList<Registro>) in.readObject();
+			reg = (ArrayList<GamerDTO>) in.readObject();
 
 			in.close();
 
-			for (int i = 0; i < reg.size(); i++) {
-
-				System.out.println(reg.get(i).getNombre());
-				System.out.println(reg.get(i).getJuego());
-				System.out.println(reg.get(i).getPuntaje()+"\n");
-			}
+	
 
 		} catch (Exception e) {
 			e.printStackTrace();

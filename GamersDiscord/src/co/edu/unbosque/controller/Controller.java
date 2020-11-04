@@ -18,21 +18,9 @@ public class Controller implements ActionListener {
 		gamer = new Gamer();
 		view = new View(this);
 		view.setVisible(true);
+	
 
-		if (gamer.getBin().leerRegistros().size() != gamer.getGamerRegistros().size()) {
-
-			for (int i = 0; i < gamer.getBin().leerRegistros().size(); i++) {
-				gamer.getGamerRegistros().add(gamer.getBin().leerRegistros().get(i));
-
-			}
-
-			view.mostrarMensaje("Datos leidos correctamente :).");
-			cargardatos();
-
-		} else {
-
-			view.mostrarMensaje("Señor usuario todos lo datos han sido leidos");
-		}
+		
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -43,45 +31,34 @@ public class Controller implements ActionListener {
 			String jug = view.pedirDatos("Ingrese nombre de jugador: ");
 			String jueg = view.pedirDatos("ingrese nombre del juego:  ");
 			Double punt = view.capturarDatoNumerico("Ingrese puntaje: ");
-			gamer.ingresarDatos(jug, jueg, punt);
-			gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-			cargardatos();
+			gamer.getGamerDAO().ingresarGamer(jug, jueg, punt);
+			gamer.getGamerDAO().getBin().escribirRegistros(gamer.getGamerDAO().getGamerRegistros());
+			cargardatosLista();
 
 		} else if (command.contains(view.getPanelControl().LEER)) {
 
-			if (gamer.getBin().leerRegistros().size() != gamer.getGamerRegistros().size()) {
+			if (gamer.getGamerDAO().leerGamers() == true) {
 
-				for (int i = 0; i < gamer.getBin().leerRegistros().size(); i++) {
-					gamer.getGamerRegistros().add(gamer.getBin().leerRegistros().get(i));
-
-				}
-
-				view.mostrarMensaje("Datos leidos correctamente :).");
-				cargardatos();
-
+				view.mostrarMensaje("Datos leidos con exito.");
+				cargardatosLista();
 			} else {
 
-				view.mostrarMensaje("Señor usuario todos lo datos han sido leidos");
+				view.mostrarMensaje("Ya se han leido todos los datos registrados.");
 			}
+
 		} else if (command.contentEquals(view.getPanelControl().BORRAR)) {
 
 			int selec = view.getPanelJugadores().getData().getSelectedIndex();
 
-			if (selec >= 0) {
+			if (gamer.getGamerDAO().borrarGamer(selec) == true) {
 
-				view.mostrarMensaje("Se va a eliminar el jugador seleccionado. ");
-
-				gamer.getGamerRegistros().remove(selec);
-				gamer.getBin().leerRegistros().remove(selec);
-
-				view.mostrarMensaje("El jugador se ha eliminado correctamente");
-
-				gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-				cargardatos();
+				view.mostrarMensaje("Jugador eliminado correctamente. ");
+				cargardatosLista();
 
 			} else {
 
-				view.mostrarMensaje("No se ha seleccionado ningun jugador. ");
+				view.mostrarMensaje("No se ha seleccionado ningun jugador para borrar");
+
 			}
 
 		} else if (command.contentEquals(view.getPanelControl().ACTUALIZAR)) {
@@ -95,51 +72,44 @@ public class Controller implements ActionListener {
 				case "1.Nombre":
 
 					String a = view.pedirDatos("Ingrese el nuevo nombre para el jugador "
-							+ gamer.getGamerRegistros().get(selec).getNombre() + ":");
-					gamer.getGamerRegistros().get(selec).setNombre(a);
-					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-					cargardatos();
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre() + ":");
+					gamer.getGamerDAO().actualizar(1, selec, a);
+					cargardatosLista();
 
 					break;
 
 				case "2.Juego":
 
 					a = view.pedirDatos("Ingrese nuevo juego para el jugador "
-							+ gamer.getGamerRegistros().get(selec).getNombre() + ":");
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre() + ":");
 
-					gamer.getGamerRegistros().get(selec).setJuego(a);
-					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-					cargardatos();
+					gamer.getGamerDAO().actualizar(2, selec, a);
+					cargardatosLista();
 
 					break;
 				case "3.Puntaje":
 
-					Double b = view.capturarDatoNumerico(
-							"Ingrese nuevo puntaje para " + gamer.getGamerRegistros().get(selec).getNombre());
+					Double b = view.capturarDatoNumerico("Ingrese nuevo puntaje para "
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre());
 
-					gamer.getGamerRegistros().get(selec).setPuntaje(b);
-					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-					cargardatos();
+					gamer.getGamerDAO().actualizar(selec, b);
+					cargardatosLista();
 
 					break;
 
 				case "4.Todos":
 
 					String gam = view.pedirDatos("Ingrese nombre a modificar para el jugador "
-							+ gamer.getGamerRegistros().get(selec).getNombre());
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre());
 
 					String jueg = view.pedirDatos("Ingrese juego a modificar para el jugador "
-							+ gamer.getGamerRegistros().get(selec).getNombre());
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre());
 
 					Double punt = view.capturarDatoNumerico("Ingrese juego a modificar para el jugador "
-							+ gamer.getGamerRegistros().get(selec).getNombre());
+							+ gamer.getGamerDAO().getGamerRegistros().get(selec).getNombre());
 
-					gamer.getGamerRegistros().get(selec).setNombre(gam);
-					gamer.getGamerRegistros().get(selec).setJuego(jueg);
-					gamer.getGamerRegistros().get(selec).setPuntaje(punt);
-					gamer.getBin().EscribirRegistros(gamer.getGamerRegistros());
-
-					cargardatos();
+					gamer.getGamerDAO().actualizarAll(selec, gam, jueg, punt);
+					cargardatosLista();
 					break;
 
 				case "Salir":
@@ -163,13 +133,13 @@ public class Controller implements ActionListener {
 
 	}
 
-	public void cargardatos() {
+	public void cargardatosLista() {
 
 		DefaultListModel<String> model = new DefaultListModel<String>();
+		gamer.getGamerDAO().modificarID();
+		for (int i = 0; i < gamer.getGamerDAO().getGamerRegistros().size(); i++) {
 
-		for (int i = 0; i < gamer.getGamerRegistros().size(); i++) {
-			gamer.getGamerRegistros().get(i).setiD(i);
-			model.addElement(gamer.getGamerRegistros().get(i).toString());
+			model.addElement(gamer.getGamerDAO().getGamerRegistros().get(i).toString());
 
 		}
 		view.getPanelJugadores().getData().setModel(model);

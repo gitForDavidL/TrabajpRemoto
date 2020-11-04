@@ -8,6 +8,7 @@ import javax.swing.border.TitledBorder;
 
 public class PanelControl extends JPanel {
 
+	private static final long serialVersionUID = 1L;
 	private JButton crear, leer, agregar, borrar, actualizar;
 	public static final String CREAR = "Crear", LEER = "leer", BORRAR = "borrar",
 			ACTUALIZAR = "actualizar";

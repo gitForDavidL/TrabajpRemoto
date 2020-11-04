@@ -2,14 +2,14 @@ package co.edu.unbosque.model.persistence;
 
 import java.io.Serializable;
 
-public class Registro implements Serializable {
+public class GamerDTO implements Serializable {
 
 	private String nombre;
 	private String juego;
 	private Double puntaje;
 	private int iD;
 
-	public Registro(String nombre, String juego, Double puntaje) {
+	public GamerDTO(String nombre, String juego, Double puntaje) {
 
 		this.nombre = nombre;
 		this.juego = juego;

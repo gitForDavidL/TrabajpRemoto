@@ -1,19 +1,14 @@
 package co.edu.unbosque.view;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GridLayout;
 
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
 import javax.swing.border.TitledBorder;
 
 public class PanelJugadores extends JPanel {
 
+	
+	private static final long serialVersionUID = 1L;
 	private JList<String> data;
 
 	public PanelJugadores() {
