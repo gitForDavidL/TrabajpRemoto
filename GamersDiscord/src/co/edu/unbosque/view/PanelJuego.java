@@ -2,15 +2,14 @@ package co.edu.unbosque.view;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
-public class PanelJugadores extends JPanel {
+public class PanelJuego extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private JList<String> data;
 
-	public PanelJugadores() {
+	public PanelJuego() {
 
 		setLayout(null);
 		setBorder(new TitledBorder("Datos ingresados"));
@@ -22,10 +21,8 @@ public class PanelJugadores extends JPanel {
 	private void inicializarComponentes() {
 
 		data = new JList<>();
-		data.setBounds(40, 20, 300, 170);
+		data.setBounds(10, 20, 380, 170);
 		add(data);
-
-
 
 	}
 

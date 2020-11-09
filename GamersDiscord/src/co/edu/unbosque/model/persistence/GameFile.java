@@ -1,19 +1,16 @@
 package co.edu.unbosque.model.persistence;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-public class BinariosFile {
+public class GameFile {
 
-	private String ruta = "./Data/registro.dat";
+	private String ruta = "./Data/Game.dat";
 
-	public void escribirRegistros(ArrayList<GamerDTO> reg) {
+	public void escribirRegistros(ArrayList<GameDTO> reg) {
 
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(ruta));
@@ -28,18 +25,16 @@ public class BinariosFile {
 
 	}
 
-	public ArrayList<GamerDTO> leerRegistros() {
+	public ArrayList<GameDTO> leerRegistros() {
 		ObjectInputStream in;
-		ArrayList<GamerDTO> reg = new ArrayList<GamerDTO>();
+		ArrayList<GameDTO> reg = new ArrayList<GameDTO>();
 		try {
 
 			in = new ObjectInputStream(new FileInputStream(ruta));
 
-			reg = (ArrayList<GamerDTO>) in.readObject();
+			reg = (ArrayList<GameDTO>) in.readObject();
 
 			in.close();
-
-	
 
 		} catch (Exception e) {
 			e.printStackTrace();

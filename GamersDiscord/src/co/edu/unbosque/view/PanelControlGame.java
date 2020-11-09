@@ -1,22 +1,21 @@
 package co.edu.unbosque.view;
 
-import java.awt.GridLayout;
-
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public class PanelControl extends JPanel {
+public class PanelControlGame extends JPanel {
 
+	
 	private static final long serialVersionUID = 1L;
-	private JButton crear, agregar, borrar, actualizar;
-	public static final String CREAR = "Crear", BORRAR = "borrar",
-			ACTUALIZAR = "actualizar";
+	private JButton crear, agregar, borrar, actualizar ;
+	public static final String CREARGAME = "CrearGame", BORRARGAME = "borrarGame",
+			ACTUALIZARGAME = "actualizarGame";
 
-	public PanelControl() {
+	public PanelControlGame() {
 
 		setLayout(null);
-		setBorder(new TitledBorder("CRUD GAMERS"));
+		setBorder(new TitledBorder("CRUD GAME"));
 		inicializarComponentes();
 
 	}
@@ -24,18 +23,18 @@ public class PanelControl extends JPanel {
 	private void inicializarComponentes() {
 
 		crear = new JButton("Crear");
-		crear.setActionCommand(CREAR);
+		crear.setActionCommand(CREARGAME);
 		crear.setBounds(30, 30, 80, 30);
 		add(crear);
 
 
 		borrar = new JButton("Borrar");
-		borrar.setActionCommand(BORRAR);
+		borrar.setActionCommand(BORRARGAME);
 		borrar.setBounds(30, 70, 80, 30);
 		add(borrar);
 
 		actualizar = new JButton("Actualizar");
-		actualizar.setActionCommand(ACTUALIZAR);
+		actualizar.setActionCommand(ACTUALIZARGAME);
 		actualizar.setBounds(25, 110, 90, 30);
 		add(actualizar);
 
@@ -75,3 +74,5 @@ public class PanelControl extends JPanel {
 	}
 
 }
+
+

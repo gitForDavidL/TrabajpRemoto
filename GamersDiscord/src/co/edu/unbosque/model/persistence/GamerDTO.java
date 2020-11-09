@@ -1,19 +1,18 @@
 package co.edu.unbosque.model.persistence;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class GamerDTO implements Serializable {
 
 	private String nombre;
-	private String juego;
-	private Double puntaje;
+	private ArrayList<GameDTO> juegos;
 	private int iD;
 
-	public GamerDTO(String nombre, String juego, Double puntaje) {
+	public GamerDTO(String nombre) {
 
 		this.nombre = nombre;
-		this.juego = juego;
-		this.puntaje = puntaje;
+		juegos = new ArrayList<>();
 
 	}
 
@@ -25,25 +24,16 @@ public class GamerDTO implements Serializable {
 		this.nombre = nombre;
 	}
 
-	public String getJuego() {
-		return juego;
+	public ArrayList<GameDTO> getJuegos() {
+		return juegos;
 	}
 
-	public void setJuego(String juego) {
-		this.juego = juego;
-	}
-
-
-	public Double getPuntaje() {
-		return puntaje;
-	}
-
-	public void setPuntaje(Double puntaje) {
-		this.puntaje = puntaje;
+	public void setJuegos(ArrayList<GameDTO> juegos) {
+		this.juegos = juegos;
 	}
 
 	public String toString() {
-		return  iD + "| Nombre: " + this.nombre + "| Juego: " + this.juego + " | Puntaje : " + this.puntaje + "\n";
+		return "ID : "+ this.iD + "| Nickname: " + this.nombre;
 	}
 
 	public int getiD() {

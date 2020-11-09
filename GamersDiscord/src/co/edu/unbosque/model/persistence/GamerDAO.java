@@ -1,33 +1,34 @@
 package co.edu.unbosque.model.persistence;
 
 import java.util.ArrayList;
+import java.util.Random;
 
-import co.edu.unbosque.model.persistence.BinariosFile;
+import co.edu.unbosque.model.persistence.GamerFile;
 import co.edu.unbosque.model.persistence.GamerDTO;
 
 public class GamerDAO {
 
-	private BinariosFile bin;
+	private GamerFile gamerFile;
 	private ArrayList<GamerDTO> gamerRegistros;
 
 	public GamerDAO() {
 
-		bin = new BinariosFile();
+		gamerFile = new GamerFile();
 		gamerRegistros = new ArrayList<GamerDTO>();
 	}
 
-	public void ingresarGamer(String nombre, String juego, Double puntaje) {
+	public void ingresarGamer(String nombre) {
 
-		gamerRegistros.add(new GamerDTO(nombre, juego, puntaje));
+		gamerRegistros.add(new GamerDTO(nombre));
 
 	}
 
 	public boolean leerGamers() {
 
-		if (gamerRegistros.size() != bin.leerRegistros().size()) {
+		if (gamerRegistros.size() != gamerFile.leerRegistros().size()) {
 
-			for (int i = 0; i < bin.leerRegistros().size(); i++) {
-				gamerRegistros.add(bin.leerRegistros().get(i));
+			for (int i = 0; i < gamerFile.leerRegistros().size(); i++) {
+				gamerRegistros.add(gamerFile.leerRegistros().get(i));
 			}
 
 			return true;
@@ -39,13 +40,18 @@ public class GamerDAO {
 
 	}
 
-	public void modificarID() {
+	public void generarID(int i) {
 
-		for (int i = 0; i < gamerRegistros.size(); i++) {
+		Random rnd = new Random();
+		int id;
 
-			gamerRegistros.get(i).setiD(i);
+			id = rnd.nextInt(2000);
 
-		}
+			gamerRegistros.get(i).setiD(id);
+
+
+		gamerFile.escribirRegistros(gamerRegistros);
+
 	}
 
 	public boolean borrarGamer(int a) {
@@ -53,8 +59,8 @@ public class GamerDAO {
 		if (a >= 0) {
 
 			gamerRegistros.remove(a);
-			bin.leerRegistros().remove(a);
-			bin.escribirRegistros(gamerRegistros);
+			gamerFile.leerRegistros().remove(a);
+			gamerFile.escribirRegistros(gamerRegistros);
 
 			return true;
 
@@ -69,37 +75,24 @@ public class GamerDAO {
 
 		if (update == 1) {
 			gamerRegistros.get(selec).setNombre(dat);
-			bin.escribirRegistros(gamerRegistros);
+			gamerFile.escribirRegistros(gamerRegistros);
 
-		} else if (update == 2) {
-
-			gamerRegistros.get(selec).setJuego(dat);
-			bin.escribirRegistros(gamerRegistros);
 		}
 
 	}
 
-	public void actualizar(int selec, Double dat) {
-
-		gamerRegistros.get(selec).setPuntaje(dat);
-		bin.escribirRegistros(gamerRegistros);
-
-	}
-
-	public void actualizarAll(int selec, String nom, String jueg, Double pun) {
+	public void actualizarAll(int selec, String nom, String jueg) {
 
 		gamerRegistros.get(selec).setNombre(nom);
-		gamerRegistros.get(selec).setJuego(jueg);
-		gamerRegistros.get(selec).setPuntaje(pun);
-		bin.escribirRegistros(gamerRegistros);
+
 	}
 
-	public BinariosFile getBin() {
-		return bin;
+	public GamerFile getBin() {
+		return gamerFile;
 	}
 
-	public void setBin(BinariosFile bin) {
-		this.bin = bin;
+	public void setBin(GamerFile bin) {
+		this.gamerFile = bin;
 	}
 
 	public ArrayList<GamerDTO> getGamerRegistros() {

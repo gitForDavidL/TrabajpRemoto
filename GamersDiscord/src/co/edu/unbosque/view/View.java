@@ -1,6 +1,9 @@
 package co.edu.unbosque.view;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -12,20 +15,21 @@ public class View extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private PanelControl panelControl;
 	private PanelJugadores panelJugadores;
+	private PanelControlGame panelControlGame;
+	private PanelJuego panelJuego;
 
 	public View(Controller control) {
 
-		setSize(550, 500);
+		setSize(600, 600);
 		setResizable(false); // Se puede cambiar el tamaño de la ventana?
 		setTitle("Gamers de discord"); // tìtulo de la ventana
 		setDefaultCloseOperation(EXIT_ON_CLOSE);// qué debe hacer si cierra la ventana
 		setLocationRelativeTo(null);
-		setLayout(new BorderLayout()); // Se agrega al layout en la parte NORTH, el panel de entrada definido
+		setLayout(null); // Se agrega al layout en la parte NORTH, el panel de entrada definido
 
 		inicializarComponentes();
 
-		panelControl.getCrear().addActionListener(control);
-		panelControl.getLeer().addActionListener(control);
+		panelControl.getCrear().addActionListener(control);  
 		panelControl.getBorrar().addActionListener(control);
 		panelControl.getActualizar().addActionListener(control);
 
@@ -34,10 +38,21 @@ public class View extends JFrame {
 	private void inicializarComponentes() {
 
 		panelControl = new PanelControl();
-		add(panelControl, BorderLayout.NORTH);
+		panelControl.setBounds(0, 0, 150, 200);
+		add(panelControl);
 
 		panelJugadores = new PanelJugadores();
-		add(panelJugadores, BorderLayout.CENTER);
+		panelJugadores.setBounds(160, 0, 400, 200);
+		add(panelJugadores);
+		
+		panelControlGame = new PanelControlGame();
+		panelControlGame.setBounds(0, 200 , 150, 200);
+		add(panelControlGame);
+		
+		panelJuego = new PanelJuego();
+		panelJuego.setBounds(160, 200, 400, 200);
+		add(panelJuego);
+		
 
 	}
 
@@ -104,7 +119,7 @@ public class View extends JFrame {
 		return opcion.toString();
 	}
 
-	public boolean esNumero(String m) {
+	private boolean esNumero(String m) {
 		try {
 			Double.parseDouble(m);
 			System.out.println("Ingreso integer");

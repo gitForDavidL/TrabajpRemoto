@@ -2,15 +2,15 @@ package co.edu.unbosque.model;
 
 import java.util.ArrayList;
 
-import co.edu.unbosque.model.persistence.BinariosFile;
+import co.edu.unbosque.model.persistence.GamerFile;
 import co.edu.unbosque.model.persistence.GamerDAO;
 import co.edu.unbosque.model.persistence.GamerDTO;
 
-public class Gamer {
+public class Torneo {
 
 	private GamerDAO gamerDAO;
 
-	public Gamer() {
+	public Torneo() {
 
 		gamerDAO = new GamerDAO();
 
