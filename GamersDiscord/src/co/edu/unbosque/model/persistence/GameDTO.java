@@ -9,10 +9,11 @@ public class GameDTO implements Serializable {
 	private String fecha;
 	private Double puntaje;
 
-	public GameDTO(String nombre, Double puntaje) {
+	public GameDTO(String nombre, Double puntaje , String fecha) {
 
 		this.nombre = nombre;
 		this.puntaje = puntaje;
+		this.fecha = fecha;
 	}
 
 	public String getNombre() {

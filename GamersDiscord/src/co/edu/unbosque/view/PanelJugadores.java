@@ -25,8 +25,6 @@ public class PanelJugadores extends JPanel {
 		data.setBounds(40, 20, 300, 170);
 		add(data);
 
-
-
 	}
 
 	public JList<String> getData() {

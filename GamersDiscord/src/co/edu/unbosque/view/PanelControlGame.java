@@ -8,9 +8,9 @@ public class PanelControlGame extends JPanel {
 
 	
 	private static final long serialVersionUID = 1L;
-	private JButton crear, agregar, borrar, actualizar ;
+	private JButton crear, agregar, borrar,leer, actualizar ;
 	public static final String CREARGAME = "CrearGame", BORRARGAME = "borrarGame",
-			ACTUALIZARGAME = "actualizarGame";
+			ACTUALIZARGAME = "actualizarGame" , LEERGAME = "leerGame";
 
 	public PanelControlGame() {
 
@@ -27,21 +27,34 @@ public class PanelControlGame extends JPanel {
 		crear.setBounds(30, 30, 80, 30);
 		add(crear);
 
+		leer =  new JButton("Leer");
+		leer.setActionCommand(LEERGAME);
+		leer.setBounds(30, 70,80,30);
+		add(leer);
+		
 
 		borrar = new JButton("Borrar");
 		borrar.setActionCommand(BORRARGAME);
-		borrar.setBounds(30, 70, 80, 30);
+		borrar.setBounds(30, 110, 80, 30);
 		add(borrar);
 
 		actualizar = new JButton("Actualizar");
 		actualizar.setActionCommand(ACTUALIZARGAME);
-		actualizar.setBounds(25, 110, 90, 30);
+		actualizar.setBounds(25, 150, 90, 30);
 		add(actualizar);
 
 	}
 
 	public JButton getCrear() {
 		return crear;
+	}
+
+	public JButton getLeer() {
+		return leer;
+	}
+
+	public void setLeer(JButton leer) {
+		this.leer = leer;
 	}
 
 	public void setCrear(JButton crear) {

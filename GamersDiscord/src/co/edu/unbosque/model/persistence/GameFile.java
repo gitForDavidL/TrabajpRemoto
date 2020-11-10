@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class GameFile {
 
 	private String ruta = "./Data/Game.dat";
-
+	
 	public void escribirRegistros(ArrayList<GameDTO> reg) {
 
 		try {
@@ -43,5 +43,4 @@ public class GameFile {
 		return reg;
 
 	}
-
 }

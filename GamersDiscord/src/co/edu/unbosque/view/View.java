@@ -11,7 +11,6 @@ import co.edu.unbosque.controller.Controller;
 
 public class View extends JFrame {
 
-	
 	private static final long serialVersionUID = 1L;
 	private PanelControl panelControl;
 	private PanelJugadores panelJugadores;
@@ -20,7 +19,7 @@ public class View extends JFrame {
 
 	public View(Controller control) {
 
-		setSize(600, 600);
+		setSize(650, 650);
 		setResizable(false); // Se puede cambiar el tamaño de la ventana?
 		setTitle("Gamers de discord"); // tìtulo de la ventana
 		setDefaultCloseOperation(EXIT_ON_CLOSE);// qué debe hacer si cierra la ventana
@@ -29,9 +28,13 @@ public class View extends JFrame {
 
 		inicializarComponentes();
 
-		panelControl.getCrear().addActionListener(control);  
+		panelControl.getCrear().addActionListener(control);
 		panelControl.getBorrar().addActionListener(control);
 		panelControl.getActualizar().addActionListener(control);
+
+		panelControlGame.getCrear().addActionListener(control);
+		panelControlGame.getLeer().addActionListener(control);
+		panelControlGame.getBorrar().addActionListener(control);
 
 	}
 
@@ -42,17 +45,16 @@ public class View extends JFrame {
 		add(panelControl);
 
 		panelJugadores = new PanelJugadores();
-		panelJugadores.setBounds(160, 0, 400, 200);
+		panelJugadores.setBounds(160, 0, 470, 200);
 		add(panelJugadores);
-		
+
 		panelControlGame = new PanelControlGame();
-		panelControlGame.setBounds(0, 200 , 150, 200);
+		panelControlGame.setBounds(0, 200, 150, 200);
 		add(panelControlGame);
-		
+
 		panelJuego = new PanelJuego();
-		panelJuego.setBounds(160, 200, 400, 200);
+		panelJuego.setBounds(160, 200, 470, 200);
 		add(panelJuego);
-		
 
 	}
 
@@ -72,11 +74,27 @@ public class View extends JFrame {
 		this.panelJugadores = panelJugadores;
 	}
 
+	public PanelControlGame getPanelControlGame() {
+		return panelControlGame;
+	}
+
+	public void setPanelControlGame(PanelControlGame panelControlGame) {
+		this.panelControlGame = panelControlGame;
+	}
+
+	public PanelJuego getPanelJuego() {
+		return panelJuego;
+	}
+
+	public void setPanelJuego(PanelJuego panelJuego) {
+		this.panelJuego = panelJuego;
+	}
+
 	public String pedirDatos(String m) {
 
 		String aux = JOptionPane.showInputDialog(m);
 
-		while (esNumero(aux) == true  || aux.isEmpty()) {
+		while (esNumero(aux) == true || aux.isEmpty()) {
 
 			mostrarMensaje("Señor No ingrese números en este campo :)");
 			aux = JOptionPane.showInputDialog(m);
@@ -113,7 +131,7 @@ public class View extends JFrame {
 	}
 
 	public String menu() {
-		Object[] opciones = { "1.Nombre", "2.Juego", "3.Puntaje", "4.Todos", "Salir" };
+		Object[] opciones = { "1.Nickname", "2.Puntaje", "3.Dia", "4.Todos", "Salir" };
 		Object opcion = JOptionPane.showInputDialog(null, "        ..:Seleciona campo a actualizar :.. ", "Elegir",
 				JOptionPane.QUESTION_MESSAGE, null, opciones, opciones[0]);
 		return opcion.toString();

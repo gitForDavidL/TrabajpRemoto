@@ -21,6 +21,8 @@ public class GamerDAO {
 
 		gamerRegistros.add(new GamerDTO(nombre));
 
+		gamerFile.escribirRegistros(gamerRegistros);
+
 	}
 
 	public boolean leerGamers() {
@@ -45,10 +47,9 @@ public class GamerDAO {
 		Random rnd = new Random();
 		int id;
 
-			id = rnd.nextInt(2000);
+		id = rnd.nextInt(2000);
 
-			gamerRegistros.get(i).setiD(id);
-
+		gamerRegistros.get(i).setiD(id);
 
 		gamerFile.escribirRegistros(gamerRegistros);
 

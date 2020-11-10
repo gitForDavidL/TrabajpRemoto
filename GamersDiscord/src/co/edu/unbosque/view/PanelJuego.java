@@ -2,6 +2,7 @@ package co.edu.unbosque.view;
 
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.TitledBorder;
 
 public class PanelJuego extends JPanel {
@@ -21,7 +22,7 @@ public class PanelJuego extends JPanel {
 	private void inicializarComponentes() {
 
 		data = new JList<>();
-		data.setBounds(10, 20, 380, 170);
+		data.setBounds(10, 20, 450, 170);
 		add(data);
 
 	}
