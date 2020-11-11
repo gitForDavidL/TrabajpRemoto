@@ -4,12 +4,10 @@ import java.util.ArrayList;
 
 public class GameDAO {
 
-	private GameFile gameFile;
 	private GamerFile bin;
 
 	public GameDAO() {
 
-		gameFile = new GameFile();
 		bin = new GamerFile();
 
 	}
@@ -48,20 +46,42 @@ public class GameDAO {
 
 	}
 
+	public String actualizar(int opc, int selecGamer, int selecGame, String nom, Double puntaje, String dia,
+			ArrayList<GamerDTO> reg) {
+
+		String resultado = "";
+
+		if (opc == 0) {
+
+			reg.get(selecGame).getJuegos().get(selecGame).setNombre(nom);
+			resultado = "Se ha cambiado el nombre con exito :)";
+		} else if (opc == 1) {
+
+			reg.get(selecGamer).getJuegos().get(selecGame).setPuntaje(puntaje);
+			resultado = "Se ha cambiado el puntaje del jugados con exito";
+
+		} else if (opc == 2) {
+			reg.get(selecGamer).getJuegos().get(selecGame).setFecha(dia);
+			resultado = "Se ha cambiado el dia del registro con exito";
+		} else if (opc == 3) {
+
+			reg.get(selecGamer).getJuegos().get(selecGame).setNombre(nom);
+			reg.get(selecGamer).getJuegos().get(selecGame).setPuntaje(puntaje);
+			reg.get(selecGamer).getJuegos().get(selecGame).setFecha(dia);
+
+			resultado = "Se han cambiado todos los campos del juego";
+		}
+
+		return resultado;
+
+	}
+
 	public GamerFile getBin() {
 		return bin;
 	}
 
 	public void setBin(GamerFile bin) {
 		this.bin = bin;
-	}
-
-	public GameFile getGameFile() {
-		return gameFile;
-	}
-
-	public void setGameFile(GameFile gameFile) {
-		this.gameFile = gameFile;
 	}
 
 }

@@ -9,9 +9,8 @@ import javax.swing.border.TitledBorder;
 public class PanelControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private JButton crear, agregar, borrar, actualizar;
-	public static final String CREAR = "Crear", BORRAR = "borrar",
-			ACTUALIZAR = "actualizar";
+	private JButton crear, agregar, borrar, actualizar, reporte;
+	public static final String CREAR = "Crear", BORRAR = "borrar", ACTUALIZAR = "actualizar", REPORTE = "reporte";
 
 	public PanelControl() {
 
@@ -28,7 +27,6 @@ public class PanelControl extends JPanel {
 		crear.setBounds(30, 30, 80, 30);
 		add(crear);
 
-
 		borrar = new JButton("Borrar");
 		borrar.setActionCommand(BORRAR);
 		borrar.setBounds(30, 70, 80, 30);
@@ -39,6 +37,11 @@ public class PanelControl extends JPanel {
 		actualizar.setBounds(25, 110, 90, 30);
 		add(actualizar);
 
+		reporte = new JButton("Generar Reporte");
+		reporte.setActionCommand(REPORTE);
+		reporte.setBounds(5, 150, 140, 30);
+		add(reporte);
+
 	}
 
 	public JButton getCrear() {
@@ -48,7 +51,6 @@ public class PanelControl extends JPanel {
 	public void setCrear(JButton crear) {
 		this.crear = crear;
 	}
-
 
 	public JButton getAgregar() {
 		return agregar;
@@ -72,6 +74,14 @@ public class PanelControl extends JPanel {
 
 	public void setActualizar(JButton actualizar) {
 		this.actualizar = actualizar;
+	}
+
+	public JButton getReporte() {
+		return reporte;
+	}
+
+	public void setReporte(JButton reporte) {
+		this.reporte = reporte;
 	}
 
 }

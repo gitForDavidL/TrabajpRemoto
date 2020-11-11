@@ -85,7 +85,7 @@ public class Controller implements ActionListener {
 		} else if (command.contentEquals(view.getPanelControlGame().CREARGAME)) {
 
 			int selec = view.getPanelJugadores().getData().getSelectedIndex();
-			
+
 			if (selec >= 0) {
 
 				String nom = view.pedirDatos("Digite nombre del juego: ");
@@ -133,6 +133,89 @@ public class Controller implements ActionListener {
 			view.mostrarMensaje("Se ha borrado el juego correctamente :)");
 
 			cargarListaGame();
+
+		} else if (command.contentEquals(view.getPanelControlGame().ACTUALIZARGAME)) {
+
+			String opcion = view.menu();
+			int jugador = view.getPanelJugadores().getData().getSelectedIndex();
+			int juego = view.getPanelJuego().getData().getSelectedIndex();
+
+			switch (opcion) {
+
+			case "1.Nickname":
+
+				String nom = view.pedirDatos("Ingrese el nuevo nombre del juego: ");
+
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setNombre(nom);
+
+				torneo.getGamerDAO().getBin().escribirRegistros(torneo.getGamerDAO().getGamerRegistros());
+
+				view.mostrarMensaje("El nombre del juego se ha cambiado con exito");
+
+				cargarListaGame();
+
+			case "2.Puntaje":
+
+				Double punt = view.capturarDatoNumerico("Ingrese nuevo Puntaje : ");
+
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setPuntaje(punt);
+
+				torneo.getGamerDAO().getBin().escribirRegistros(torneo.getGamerDAO().getGamerRegistros());
+
+				cargardatosListaGamers();
+
+			case "3.Dia":
+
+				String dia = view.pedirDatos("Ingrese el nuevo nombre del juego: ");
+
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setFecha(dia);
+
+				torneo.getGamerDAO().getBin().escribirRegistros(torneo.getGamerDAO().getGamerRegistros());
+
+				view.mostrarMensaje("El dia del registro se ha cambiado con exito");
+
+				cargarListaGame();
+
+			case "4.Todos":
+
+				nom = view.pedirDatos("Ingrese el nuevo nombre del juego: ");
+				punt = view.capturarDatoNumerico("Ingrese nuevo Puntaje : ");
+				dia = view.pedirDatos("Ingrese el nuevo nombre del juego: ");
+
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setPuntaje(punt);
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setFecha(dia);
+				torneo.getGamerDAO().getGamerRegistros().get(jugador).getJuegos().get(juego).setNombre(nom);
+				torneo.getGamerDAO().getBin().escribirRegistros(torneo.getGamerDAO().getGamerRegistros());
+
+				view.mostrarMensaje("Se han cambiado todos los datos con exito");
+
+				cargarListaGame();
+
+			case "Salir":
+
+				view.mostrarMensaje("Hasta pronto :)");
+
+			default:
+
+			}
+
+		} else if (command.contentEquals(view.getPanelControl().REPORTE)) {
+
+			int jugador = view.getPanelJugadores().getData().getSelectedIndex();
+
+			if (jugador >= 0) {
+
+				view.setSize(1000, 450);
+				view.getPanelResultados().setVisible(true);
+				view.getPanelResultados().getResultados().setEditable(true);
+				view.getPanelResultados().getResultados().setText(torneo.generarReporte(jugador));
+				view.getPanelResultados().getResultados().setEditable(false);
+
+			} else {
+
+				view.mostrarMensaje("Señor usuario seleccione un jugador para generar registro");
+
+			}
 
 		}
 

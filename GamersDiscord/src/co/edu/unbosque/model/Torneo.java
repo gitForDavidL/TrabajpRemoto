@@ -36,6 +36,25 @@ public class Torneo {
 		}
 	}
 
+	public String generarReporte(int jug) {
+
+		String nombre = gamerDAO.getGamerRegistros().get(jug).getNombre();
+
+		String juegos = "";
+		for (int i = 0; i < gamerDAO.getGamerRegistros().get(jug).getJuegos().size(); i++) {
+
+			juegos += gamerDAO.getGamerRegistros().get(jug).getJuegos().get(i).getNombre() + " , ";
+
+		}
+
+		int id = gamerDAO.getGamerRegistros().get(jug).getiD();
+
+		return "El jugador: " + nombre + "\nTiene como  Id :  " + id + "\nTiene registrados  "
+				+ gamerDAO.getGamerRegistros().get(jug).getJuegos().size() + " juegos. " + "\nLos cuales son: "
+				+ juegos;
+
+	}
+
 	public GamerDAO getGamerDAO() {
 		return gamerDAO;
 	}

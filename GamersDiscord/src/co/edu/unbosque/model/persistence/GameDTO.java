@@ -50,7 +50,7 @@ public class GameDTO implements Serializable {
 
 	public String toString() {
 
-		return "| Nombre del juego: " + this.nombre + " | ID jugador: " + ID + "| Fecha :  " + this.fecha
+		return "| Nombre del juego: " + this.nombre + " | ID jugador: " + ID + "| Dia: " + this.fecha
 				+ "| Puntaje: " + this.puntaje + " | ";
 	}
 

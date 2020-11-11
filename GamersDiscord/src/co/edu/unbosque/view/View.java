@@ -16,10 +16,11 @@ public class View extends JFrame {
 	private PanelJugadores panelJugadores;
 	private PanelControlGame panelControlGame;
 	private PanelJuego panelJuego;
+	private PanelResultados panelResultados;
 
 	public View(Controller control) {
 
-		setSize(650, 650);
+		setSize(650, 450);
 		setResizable(false); // Se puede cambiar el tamaño de la ventana?
 		setTitle("Gamers de discord"); // tìtulo de la ventana
 		setDefaultCloseOperation(EXIT_ON_CLOSE);// qué debe hacer si cierra la ventana
@@ -31,10 +32,12 @@ public class View extends JFrame {
 		panelControl.getCrear().addActionListener(control);
 		panelControl.getBorrar().addActionListener(control);
 		panelControl.getActualizar().addActionListener(control);
+		panelControl.getReporte().addActionListener(control);
 
 		panelControlGame.getCrear().addActionListener(control);
 		panelControlGame.getLeer().addActionListener(control);
 		panelControlGame.getBorrar().addActionListener(control);
+		panelControlGame.getActualizar().addActionListener(control);
 
 	}
 
@@ -55,6 +58,10 @@ public class View extends JFrame {
 		panelJuego = new PanelJuego();
 		panelJuego.setBounds(160, 200, 470, 200);
 		add(panelJuego);
+		
+		panelResultados = new PanelResultados();
+		panelResultados.setBounds(630, 0, 350, 400);
+		add(panelResultados);
 
 	}
 
@@ -88,6 +95,14 @@ public class View extends JFrame {
 
 	public void setPanelJuego(PanelJuego panelJuego) {
 		this.panelJuego = panelJuego;
+	}
+
+	public PanelResultados getPanelResultados() {
+		return panelResultados;
+	}
+
+	public void setPanelResultados(PanelResultados panelResultados) {
+		this.panelResultados = panelResultados;
 	}
 
 	public String pedirDatos(String m) {
