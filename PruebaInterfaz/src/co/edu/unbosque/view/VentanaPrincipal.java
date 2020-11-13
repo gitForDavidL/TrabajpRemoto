@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 
 public class VentanaPrincipal extends JFrame {
 
-	private PanelInicioSesion panelInicioSesion;
-	private PanelJuegos panelJuegos;
+	// private PanelInicioSesion panelInicioSesion;
+	private PanelControlAdmin panelControlAdmin;
 
 	public VentanaPrincipal() {
 
@@ -16,7 +16,7 @@ public class VentanaPrincipal extends JFrame {
 		setSize(900, 700);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setBackground(Color.lightGray);
-		getContentPane().setLayout(null);
+		getContentPane().setLayout(new BorderLayout());
 		inicializarComponentes();
 		setLocationRelativeTo(null);
 		setVisible(true);
@@ -25,18 +25,12 @@ public class VentanaPrincipal extends JFrame {
 
 	private void inicializarComponentes() {
 
-		panelInicioSesion = new PanelInicioSesion();
-		panelInicioSesion.setBounds(5, 5, 875, 100);
-		add(panelInicioSesion);
+		// panelInicioSesion = new PanelInicioSesion();
+		// add(panelInicioSesion, BorderLayout.CENTER);
 		
-		panelJuegos = new PanelJuegos();
-		panelJuegos.setBounds(5,113, 875, 545);
-		add(panelJuegos);
-		
-		
+		panelControlAdmin = new PanelControlAdmin();
+		add(panelControlAdmin);
 
 	}
-	
-	
 
 }
