@@ -27,10 +27,24 @@ public class VentanaPrincipal extends JFrame {
 
 		// panelInicioSesion = new PanelInicioSesion();
 		// add(panelInicioSesion, BorderLayout.CENTER);
-		
+
 		panelControlAdmin = new PanelControlAdmin();
 		add(panelControlAdmin);
 
+	}
+
+	/**
+	 * @return the panelControlAdmin
+	 */
+	public PanelControlAdmin getPanelControlAdmin() {
+		return panelControlAdmin;
+	}
+
+	/**
+	 * @param panelControlAdmin the panelControlAdmin to set
+	 */
+	public void setPanelControlAdmin(PanelControlAdmin panelControlAdmin) {
+		this.panelControlAdmin = panelControlAdmin;
 	}
 
 }
