@@ -20,7 +20,7 @@ public class PanelSede extends JPanel {
 
 	private JPanel[] panelesSede;
 	private JButton[] botonesControlSedes;
-	private JLabel[] labelsControlSedes, labelsCrear, labelsModificar, labelsBorrar;
+	private JLabel[] labelsControlSedes, labelsCrear, labelsModificar, labelsBorrar, labelsSedes;
 	private JTextField[] campoCrear, campoModificar;
 	private JButton guardarCrear, guardarSedeModificar, borrarSede;
 	private JComboBox<String> localidadesModificar, localidadCrear, sedesModificar, sedesBorrar;
@@ -83,15 +83,15 @@ public class PanelSede extends JPanel {
 
 		localidadCrear = new JComboBox<String>();
 		localidadCrear.addItem("");
-		localidadCrear.addItem("Usaquén.");
-		localidadCrear.addItem("Chapinero.");
+		localidadCrear.addItem("Usaquén");
+		localidadCrear.addItem("Chapinero");
 		localidadCrear.addItem("San Cristobal");
-		localidadCrear.addItem("Santa Fe.");
-		localidadCrear.addItem("San Cristóbal.");
-		localidadCrear.addItem("Usme.");
-		localidadCrear.addItem("Tunjuelito.");
-		localidadCrear.addItem("Bosa.");
-		localidadCrear.addItem("Kennedy.");
+		localidadCrear.addItem("Santa Fe");
+		localidadCrear.addItem("San Cristóbal");
+		localidadCrear.addItem("Usme");
+		localidadCrear.addItem("Tunjuelito");
+		localidadCrear.addItem("Bosa");
+		localidadCrear.addItem("Kennedy");
 		localidadCrear.addItem("Fontibon");
 		localidadCrear.addItem("Engativá");
 		localidadCrear.addItem("suba");
@@ -144,15 +144,15 @@ public class PanelSede extends JPanel {
 
 		localidadesModificar = new JComboBox<String>();
 		localidadesModificar.addItem("");
-		localidadesModificar.addItem("Usaquén.");
-		localidadesModificar.addItem("Chapinero.");
+		localidadesModificar.addItem("Usaquén");
+		localidadesModificar.addItem("Chapinero");
 		localidadesModificar.addItem("San Cristobal");
 		localidadesModificar.addItem("Santa Fe.");
-		localidadesModificar.addItem("San Cristóbal.");
-		localidadesModificar.addItem("Usme.");
-		localidadesModificar.addItem("Tunjuelito.");
-		localidadesModificar.addItem("Bosa.");
-		localidadesModificar.addItem("Kennedy.");
+		localidadesModificar.addItem("San Cristóbal");
+		localidadesModificar.addItem("Usme");
+		localidadesModificar.addItem("Tunjuelito");
+		localidadesModificar.addItem("Bosa");
+		localidadesModificar.addItem("Kennedy");
 		localidadesModificar.addItem("Fontibon");
 		localidadesModificar.addItem("Engativá");
 		localidadesModificar.addItem("suba");
@@ -165,7 +165,7 @@ public class PanelSede extends JPanel {
 
 		inicializarPaneles(3, Color.WHITE, 0, 155, 700, 500); // panel borrar
 
-		labelsBorrar = new JLabel[3];
+		labelsBorrar = new JLabel[4];
 		inicializarLabels(labelsBorrar, "Eliminar Sede: ", 0, 30, 50, 210, 20, devolverPaneles(3), new Color(3, 6, 97),
 				20);
 
@@ -192,12 +192,21 @@ public class PanelSede extends JPanel {
 		borrarSede.setBounds(300, 380, 60, 60);
 		devolverPaneles(3).add(borrarSede);
 
-		inicializarPaneles(4, Color.WHITE, 0, 155, 700, 500);
+		inicializarPaneles(4, Color.YELLOW, 0, 155, 700, 500);
 
-		tablaSede = new JTable();	
-		tablaSede.setBounds(40, 40, 300, 300);
+		tablaSede = new JTable();
+		tablaSede.setBounds(40, 150, 620, 300);
 		devolverPaneles(4).add(tablaSede);
-	
+
+		labelsSedes = new JLabel[5];
+
+		inicializarLabels(labelsSedes, "Sedes activas: ", 0, 30, 50, 210, 20, devolverPaneles(4), new Color(3, 6, 97),
+				20);
+		inicializarLabels(labelsSedes, "Nombre", 1, 40, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
+		inicializarLabels(labelsSedes, "Presupuesto", 2, 195, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
+		inicializarLabels(labelsSedes, "Localidad", 3, 350, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
+		inicializarLabels(labelsSedes, "Presupuesto", 3, 505, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
+
 	}
 
 	public void inicializarPaneles(int pos, Color color, int x, int y, int ancho, int largo) {
@@ -221,6 +230,11 @@ public class PanelSede extends JPanel {
 		bot[pos].setCursor(new Cursor(Cursor.HAND_CURSOR));
 		bot[pos].setBounds(x, y, xB, yB);
 		jp.add(bot[pos]);
+	}
+
+	public JLabel devolverLabels(int pos, JLabel[] jb) {
+
+		return jb[pos];
 	}
 
 	public void inicializarLabels(JLabel[] lab, String tipoRegistro, int pos, int x, int y, int xB, int yB, JPanel jp,

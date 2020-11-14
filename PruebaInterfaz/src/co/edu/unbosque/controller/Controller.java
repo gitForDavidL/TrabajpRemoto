@@ -4,7 +4,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumnModel;
 import javax.swing.text.View;
+
+import com.sun.jdi.Value;
 
 import co.edu.unbosque.model.CasaApuesta;
 import co.edu.unbosque.view.VentanaPrincipal;
@@ -311,9 +315,14 @@ public class Controller implements ActionListener {
 
 			int selec = vista.getPanelControlAdmin().getPanelSede().getSedesBorrar().getSelectedIndex();
 
-			if (vista.getPanelControlAdmin().getPanelSede().getBorrar().isSelected()
-					|| vista.getPanelControlAdmin().getPanelSede().getSedesBorrar().getSelectedIndex() > 0) {
+			if (!vista.getPanelControlAdmin().getPanelSede().getBorrar().isSelected()
+					|| vista.getPanelControlAdmin().getPanelSede().getSedesBorrar().getSelectedIndex() == 0) {
 
+				vista.mostrarMensaje("Señor usuario no confirmo eliminar la sede o no selecciono sede para eliminar. ");
+
+				
+
+			} else {
 				casaApuesta.getSedesDAO().eliminarSede(selec - 1);
 
 				vista.mostrarMensaje("Sede eliminada con exito.");
@@ -327,10 +336,6 @@ public class Controller implements ActionListener {
 							.addItem(casaApuesta.getSedesDAO().getSedes().get(i).getNombre());
 
 				}
-
-			} else {
-
-				vista.mostrarMensaje("Señor usuario no confirmo eliminar la sede o no selecciono sede para eliminar. ");
 
 			}
 
@@ -358,6 +363,8 @@ public class Controller implements ActionListener {
 		headTable[2] = "Localidad";
 		headTable[3] = "Empleados";
 
+		
+
 		String datos[][];
 
 		casaApuesta.getSedesDAO().getFileSede().leerRegistros();
@@ -368,12 +375,17 @@ public class Controller implements ActionListener {
 			datos[i][0] = casaApuesta.getSedesDAO().getSedes().get(i).getNombre();
 			datos[i][1] = casaApuesta.getSedesDAO().getSedes().get(i).getPresupuesto().toString();
 			datos[i][2] = casaApuesta.getSedesDAO().getSedes().get(i).getLocalidad();
-			datos[i][3] = casaApuesta.getSedesDAO().getSedes().get(i).getPresupuesto().toString();
+			datos[i][3] = Integer.toString(casaApuesta.getSedesDAO().getSedes().get(i).getEmpleados());
 
 		}
 
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);
 		vista.getPanelControlAdmin().getPanelSede().getTablaSede().setModel(modelo);
+		
+		for (int i = 0; i < 4; i++) {
+
+			vista.getPanelControlAdmin().getPanelSede().getTablaSede().getColumn(headTable[i]).setHeaderValue(headTable[i]);
+		}
 
 	}
 
