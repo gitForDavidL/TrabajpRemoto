@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -46,5 +47,11 @@ public class VentanaPrincipal extends JFrame {
 	public void setPanelControlAdmin(PanelControlAdmin panelControlAdmin) {
 		this.panelControlAdmin = panelControlAdmin;
 	}
+	
+	public void mostrarMensaje(String m) {
+		JOptionPane.showMessageDialog(null, m);
+	}
+	
+	
 
 }
