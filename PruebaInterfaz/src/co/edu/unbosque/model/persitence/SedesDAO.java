@@ -20,7 +20,7 @@ public class SedesDAO {
 				sedes.add(fileSede.leerRegistros().get(i));
 			}
 		} else {
-			System.out.println("Todas las sede leidas con exito. ");
+			System.out.println("Todas las sedes leidas con exito. ");
 		}
 
 	}

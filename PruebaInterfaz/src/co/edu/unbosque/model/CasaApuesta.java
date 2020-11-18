@@ -1,15 +1,25 @@
 package co.edu.unbosque.model;
 
+import co.edu.unbosque.model.persitence.EventosDAO;
 import co.edu.unbosque.model.persitence.SedesDAO;
 
 public class CasaApuesta {
 
 	private SedesDAO sedesDAO;
+	private EventosDAO eventosDAO;
 
 	public CasaApuesta() {
-		
-		sedesDAO = new SedesDAO();
 
+		sedesDAO = new SedesDAO();
+		eventosDAO = new EventosDAO();
+
+	}
+
+	public void cargarEventosSedes(int selec, String nombre, String sede, Double presupuesto, String fecha) {
+
+		sedesDAO.getSedes().get(selec).getEventosDTO().add(eventosDAO.ingresarEvento(nombre, sede, presupuesto, fecha));
+
+		sedesDAO.getFileSede().escribirRegistros(sedesDAO.getSedes());
 	}
 
 	/**

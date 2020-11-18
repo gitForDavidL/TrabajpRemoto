@@ -2,7 +2,9 @@ package co.edu.unbosque.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Date;
 
+import javax.swing.JToolTip;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumnModel;
@@ -41,10 +43,25 @@ public class Controller implements ActionListener {
 				.devolverBoton(2, vista.getPanelControlAdmin().getPanelSede().getBotonesControlSedes())
 				.addActionListener(this);
 
+		vista.getPanelControlAdmin().devolverBoton(1, vista.getPanelControlAdmin().getBotonesControl())
+				.addActionListener(this);
+
+		vista.getPanelControlAdmin().getPanelEventos()
+				.devolverBoton(0, vista.getPanelControlAdmin().getPanelEventos().getBotonesControlEventos())
+				.addActionListener(this);
+
+		vista.getPanelControlAdmin().getPanelEventos()
+				.devolverBoton(1, vista.getPanelControlAdmin().getPanelEventos().getBotonesControlEventos())
+				.addActionListener(this);
+
+		vista.getPanelControlAdmin().getPanelEventos()
+				.devolverBoton(2, vista.getPanelControlAdmin().getPanelEventos().getBotonesControlEventos())
+				.addActionListener(this);
+
 		vista.getPanelControlAdmin().getPanelSede().getGuardarCrear().addActionListener(this);
 		vista.getPanelControlAdmin().getPanelSede().getGuardarSedeModificar().addActionListener(this);
 		vista.getPanelControlAdmin().getPanelSede().getBorrarSede().addActionListener(this);
-
+		vista.getPanelControlAdmin().getPanelEventos().getGuardarEvento().addActionListener(this);
 	}
 
 	@Override
@@ -52,6 +69,9 @@ public class Controller implements ActionListener {
 		String command = e.getActionCommand();
 
 		if (command.equals("SEDES")) {
+
+			vista.getPanelControlAdmin().getPanelSede().setVisible(true);
+			vista.getPanelControlAdmin().getPanelEventos().setVisible(false);
 			casaApuesta.getSedesDAO().leerSedes();
 			vista.getPanelControlAdmin().getPanelSede().devolverPaneles(0).setVisible(true);
 			vista.getPanelControlAdmin().getPanelSede().devolverPaneles(4).setVisible(true);
@@ -81,6 +101,7 @@ public class Controller implements ActionListener {
 							.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoCrear()).getText()
 							.isEmpty()) {
 
+				vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 				vista.mostrarMensaje("Seño usuario hay campos vacios.");
 
 			} else {
@@ -95,6 +116,7 @@ public class Controller implements ActionListener {
 								.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoCrear())
 								.getText().isBlank()) {
 
+					vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 					vista.mostrarMensaje("Señor usuario hay campos vacios");
 
 				} else {
@@ -108,6 +130,7 @@ public class Controller implements ActionListener {
 							|| esNumero(vista.getPanelControlAdmin().getPanelSede()
 									.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoCrear())
 									.getText()) == false) {
+						vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 						vista.mostrarMensaje("Señor usuario verifique los datos ingresados");
 					} else {
 
@@ -149,6 +172,7 @@ public class Controller implements ActionListener {
 
 						} else {
 
+							vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 							vista.mostrarMensaje("Señor usuario no ha escogido ninguna localidad para la nueva sede. ");
 
 						}
@@ -190,6 +214,7 @@ public class Controller implements ActionListener {
 							.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoModificar())
 							.getText().isEmpty()) {
 
+				vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 				vista.mostrarMensaje("Señor usuario hay campos vacios.");
 
 			} else {
@@ -204,6 +229,7 @@ public class Controller implements ActionListener {
 								.devolverTextField(2, vista.getPanelControlAdmin().getPanelSede().getCampoModificar())
 								.getText().isBlank()) {
 
+					vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 					vista.mostrarMensaje("Señor usuario hay campos vacios.");
 
 				} else {
@@ -284,6 +310,7 @@ public class Controller implements ActionListener {
 
 					} else {
 
+						vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 						vista.mostrarMensaje(
 								"Valide sede a modificar o localidad de la sede (no pueden estar en blanco). ");
 
@@ -318,9 +345,8 @@ public class Controller implements ActionListener {
 			if (!vista.getPanelControlAdmin().getPanelSede().getBorrar().isSelected()
 					|| vista.getPanelControlAdmin().getPanelSede().getSedesBorrar().getSelectedIndex() == 0) {
 
+				vista.getPanelControlAdmin().getPanelSede().getToolkit().beep();
 				vista.mostrarMensaje("Señor usuario no confirmo eliminar la sede o no selecciono sede para eliminar. ");
-
-				
 
 			} else {
 				casaApuesta.getSedesDAO().eliminarSede(selec - 1);
@@ -334,6 +360,91 @@ public class Controller implements ActionListener {
 
 					vista.getPanelControlAdmin().getPanelSede().getSedesBorrar()
 							.addItem(casaApuesta.getSedesDAO().getSedes().get(i).getNombre());
+
+				}
+
+				vista.getPanelControlAdmin().getPanelSede().getBorrar().setSelected(false);
+
+			}
+
+		} else if (command.equals("EVENTOS")) {
+
+			vista.getPanelControlAdmin().getPanelEventos().setVisible(true);
+			vista.getPanelControlAdmin().getPanelSede().setVisible(false);
+			vista.getPanelControlAdmin().getPanelEventos().devolverPaneles(0).setVisible(true);
+
+			vista.repaint();
+
+		} else if (command.equals("CREAR_EVENTO")) {
+
+			vista.getPanelControlAdmin().getPanelEventos().devolverPaneles(1).setVisible(true);
+			vista.repaint();
+
+			casaApuesta.getSedesDAO().leerSedes();
+			vista.getPanelControlAdmin().getPanelEventos().devolverBox(0).removeAllItems();
+			vista.getPanelControlAdmin().getPanelEventos().devolverBox(0).addItem("");
+
+			for (int i = 0; i < casaApuesta.getSedesDAO().getSedes().size(); i++) {
+
+				vista.getPanelControlAdmin().getPanelEventos().devolverBox(0)
+						.addItem(casaApuesta.getSedesDAO().getSedes().get(i).getNombre());
+
+			}
+
+		} else if (command.equals("SAVE_EVENTO")) {
+
+			if (vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText().isEmpty()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText().isEmpty()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText().isBlank()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText().isBlank()
+					|| vista.getPanelControlAdmin().getPanelEventos().devolverCalendario(0).getDate() == null) {
+
+				vista.mostrarMensaje("Señor usuario hay espacios en blanco :) ");
+
+			} else {
+
+				if (esNumero(vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText()) == false
+						|| esNumero(vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0)
+								.getText()) == true) {
+
+					vista.mostrarMensaje("Valide datos ingresados");
+
+				} else {
+					if (vista.getPanelControlAdmin().getPanelEventos().devolverBox(0).getSelectedIndex() == 0) {
+
+						vista.mostrarMensaje("Seleccione sede del evento. ");
+					} else {
+
+						String nombre = vista.getPanelControlAdmin().getPanelEventos().devolverTextField(0).getText();
+
+						Date hoy = new Date();
+						String fecha = "";
+
+						if (vista.getPanelControlAdmin().getPanelEventos().devolverCalendario(0).getDate()
+								.compareTo(hoy) >= 0) {
+
+							fecha = vista.getPanelControlAdmin().getPanelEventos().devolverCalendario(0).getDate()
+									.toGMTString();
+
+						} else {
+
+							vista.mostrarMensaje("Fecha invalida.");
+						}
+
+						String sede = vista.getPanelControlAdmin().getPanelEventos().devolverBox(0).getSelectedItem()
+								.toString();
+
+						int selecSede = vista.getPanelControlAdmin().getPanelEventos().devolverBox(0).getSelectedIndex()
+								- 1;
+
+						Double presupuesto = Double.parseDouble(
+								vista.getPanelControlAdmin().getPanelEventos().devolverTextField(1).getText());
+
+						casaApuesta.cargarEventosSedes(selecSede, nombre, sede, presupuesto, fecha);
+						
+						vista.mostrarMensaje("Sedes creadas con exito. ");
+
+					}
 
 				}
 
@@ -363,8 +474,6 @@ public class Controller implements ActionListener {
 		headTable[2] = "Localidad";
 		headTable[3] = "Empleados";
 
-		
-
 		String datos[][];
 
 		casaApuesta.getSedesDAO().getFileSede().leerRegistros();
@@ -381,10 +490,11 @@ public class Controller implements ActionListener {
 
 		DefaultTableModel modelo = new DefaultTableModel(datos, headTable);
 		vista.getPanelControlAdmin().getPanelSede().getTablaSede().setModel(modelo);
-		
+
 		for (int i = 0; i < 4; i++) {
 
-			vista.getPanelControlAdmin().getPanelSede().getTablaSede().getColumn(headTable[i]).setHeaderValue(headTable[i]);
+			vista.getPanelControlAdmin().getPanelSede().getTablaSede().getColumn(headTable[i])
+					.setHeaderValue(headTable[i]);
 		}
 
 	}

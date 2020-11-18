@@ -192,7 +192,7 @@ public class PanelSede extends JPanel {
 		borrarSede.setBounds(300, 380, 60, 60);
 		devolverPaneles(3).add(borrarSede);
 
-		inicializarPaneles(4, Color.YELLOW, 0, 155, 700, 500);
+		inicializarPaneles(4, new Color(218, 238, 238), 0, 155, 700, 500);
 
 		tablaSede = new JTable();
 		tablaSede.setBounds(40, 150, 620, 300);
@@ -205,7 +205,7 @@ public class PanelSede extends JPanel {
 		inicializarLabels(labelsSedes, "Nombre", 1, 40, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
 		inicializarLabels(labelsSedes, "Presupuesto", 2, 195, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
 		inicializarLabels(labelsSedes, "Localidad", 3, 350, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
-		inicializarLabels(labelsSedes, "Presupuesto", 3, 505, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
+		inicializarLabels(labelsSedes, "Empleados", 3, 505, 130, 100, 13, devolverPaneles(4), new Color(3, 6, 97), 13);
 
 	}
 
@@ -516,6 +516,20 @@ public class PanelSede extends JPanel {
 	 */
 	public void setTablaSede(JTable tablaSede) {
 		this.tablaSede = tablaSede;
+	}
+
+	/**
+	 * @return the labelsSedes
+	 */
+	public JLabel[] getLabelsSedes() {
+		return labelsSedes;
+	}
+
+	/**
+	 * @param labelsSedes the labelsSedes to set
+	 */
+	public void setLabelsSedes(JLabel[] labelsSedes) {
+		this.labelsSedes = labelsSedes;
 	}
 
 }

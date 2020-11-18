@@ -19,6 +19,7 @@ public class PanelControlAdmin extends JPanel {
 	private JButton[] botonesControl;
 	private JLabel[] labelsControl;
 	private PanelSede panelSede;
+	private PanelEventos panelEventos;
 
 	public PanelControlAdmin() {
 
@@ -31,6 +32,9 @@ public class PanelControlAdmin extends JPanel {
 
 		panelSede = new PanelSede();
 		add(panelSede);
+
+		panelEventos = new PanelEventos();
+		add(panelEventos);
 
 		panelControl = new JPanel(); // Panel de control del admin, para moverser por las opciones :)
 		panelControl.setBackground(Color.WHITE);
@@ -148,6 +152,20 @@ public class PanelControlAdmin extends JPanel {
 	 */
 	public void setPanelSede(PanelSede panelSede) {
 		this.panelSede = panelSede;
+	}
+
+	/**
+	 * @return the panelEventos
+	 */
+	public PanelEventos getPanelEventos() {
+		return panelEventos;
+	}
+
+	/**
+	 * @param panelEventos the panelEventos to set
+	 */
+	public void setPanelEventos(PanelEventos panelEventos) {
+		this.panelEventos = panelEventos;
 	}
 
 }
